@@ -2,15 +2,27 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 
+const { Pool } = pg;
+
 const app = express();
 const port = 3000;
 
-const db = new pg.Client({
+/*const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "bookNotes",
   password: "r3t5rd3ds0n",
   port: 5432,
+});*/
+const connectionString =
+  "postgresql://sean:m93vSHgCKkMVhieVcapt1JdEVYnw9pNQ@dpg-daunjqm0tbcc73bvl7k0-a.ohio-postgres.render.com/booklist_0h9v";
+
+const db = new Pool({
+  connectionString: connectionString,
+  // If you're using a service like Heroku, you might need this for SSL:
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 db.connect();
