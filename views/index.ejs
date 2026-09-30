@@ -1,0 +1,139 @@
+<%- include('partials/header.ejs'); -%>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <title>Kiddo Book Suggestions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+<div class="container">
+  <h1>The Kiddos Book List</h1>
+  <h2>This is a compilation of all the book suggestions my friends have for each other. It can be shared with anyone, but we're the only ones who can add and edit it. Enjoy this small project and our vast differences in taste!</h2>
+</div>
+<form action="/add" method ="post" >
+  <button class="bigGreen pointer" type="submit">Add a Book</button>
+</form>
+
+<form action="/sort" method="post">
+  <select name="sort">
+    <option value="new">Recently Added</option>
+    <option value="old">Ancient</option>
+    <option value="alphDown">Alphabetical (Descending) </option>
+    <option value="alphUp">Alphabetical (Ascending) </option>
+    <option value="recDown">Recommender (Descending) </option>
+    <option value="recUp">Recommender (Ascending) </option>
+  </select>
+<button class="doneButton pointer" type="submit">Sort</button>
+</form>
+    <div class="container">
+         <% books.forEach(function(book) { %>
+            <h2 id="title<%=book.id%>"><%= book.book_name%></h2>
+            <div class="row" id="row<%= book.id%>">
+              <h4 class="recommend" >Recommender: <%=book.name %></h4> 
+              <form action="/edit" method="post">
+                <button class="editButton pointer" type="button" id="edit<%=book.id%>" onclick="handler('<%=book.id%>')">Edit</button>
+                <div class="column">
+                  <input type="hidden" name="updatedItemId" value="<%= book.id %>">
+                  <input type="hidden" name="currentLink" value="<%= book.link %>">
+                <textarea id="inputTitle<%=book.id%>" type="text" name="updatedItemTitle" value="<%= book.book_name %>" autocomplete="off"
+            autofocus="true" hidden="true" class="autoGrow"><%= book.book_name %></textarea>
+                <textarea id="inputDescription<%=book.id%>" type="text" name="updatedItemDescription" value="<%= book.description %>" autocomplete="off"
+            autofocus="true" hidden="true" class="autoGrow"><%= book.description %></textarea>
+            <textarea id="inputISBN<%=book.id%>" type="text" name="updatedItemISBN" value="Input new ISBN if desired" autocomplete="off"
+            autofocus="true" hidden="true" class="autoGrow">Input new ISBN-10 if needed</textarea>
+                <textarea id="inputPassword<%=book.id%>" type="text" name="password" value="Input Password" autocomplete="off"
+            autofocus="true" hidden="true" class="autoGrow">Input Password</textarea>
+            </div>
+                <button class="doneButton pointer" id="done<%=book.id%>" type="submit" hidden>Save</button>
+                <button class="cancelButton pointer" id="cancel<%=book.id%>" type="button" onclick="reverseHandler('<%=book.id%>')" hidden>Cancel</button>
+              </form>
+              </form>
+              <button class="deleteButton pointer" type="button" id="delete<%=book.id%>"
+                data-id="<%= book.id %>" data-title="<%= book.book_name %>"
+                onclick="openSheet(this)">Delete</button>
+            </div>
+                  <img src="<%=book.link%>" /> 
+                <h3 style="text-align: center;" id="description<%=book.id%>"> <%=book.description%></h3>
+            <% }); %>
+            <form id="pageMarker" class="pages" type="button" action="/page" method="post">
+              <% for (let i = 1; i < pages; i++) { %>
+                <input class="none" type="submit" name="whichPage" value=<%=i%> onclick="nextPage()"></input>
+                <% } %>
+              </form>
+            </div>
+            
+            <div id="overlay" class="overlay" onclick="closeSheet()"></div>
+
+            <div id="sheet" class="sheet middle">
+              <h3 style="color:black; margin-right: 16px;">Delete "<span id="sheetTitle"></span>"?</h3>
+              <form action="/delete" method="post" id="sheetTitle" class="middle">
+                <input type="hidden" name="id" id="sheetId">
+                <input type="password" name="password" placeholder="Password" autocomplete="off">
+                <button type="submit">Confirm delete</button>
+                <button type="button" onclick="closeSheet()">Cancel</button>
+              </form>
+            </div>
+
+            <script>
+              function nextPage() {
+                document.getElementById('pageMarker').submit();
+              }
+
+              function handler(id) {
+                document.getElementById("title" + id).setAttribute("hidden", true)
+                document.getElementById("edit" + id).setAttribute("hidden", true)
+                document.getElementById("delete" + id).setAttribute("hidden", true)
+                document.getElementById("description" + id).setAttribute("hidden", true)
+                document.getElementById("done" + id).removeAttribute("hidden")
+                document.getElementById("cancel" + id).removeAttribute("hidden")
+                document.getElementById("inputTitle" + id).removeAttribute("hidden")
+                document.getElementById("inputDescription" + id).removeAttribute("hidden")
+                document.getElementById("inputPassword" + id).removeAttribute("hidden")
+                document.getElementById("inputISBN" + id).removeAttribute("hidden")
+                document.getElementById("row" + id).classList.replace("row", "column")
+              }
+
+              function reverseHandler(id) {
+                document.getElementById("title" + id).removeAttribute("hidden")
+                document.getElementById("edit" + id).removeAttribute("hidden")
+                document.getElementById("delete" + id).removeAttribute("hidden")
+                document.getElementById("description" + id).removeAttribute("hidden")
+                document.getElementById("done" + id).setAttribute("hidden", true)
+                document.getElementById("cancel" + id).setAttribute("hidden", true)
+                document.getElementById("inputTitle" + id).setAttribute("hidden", true)
+                document.getElementById("inputDescription" + id).setAttribute("hidden", true)
+                document.getElementById("inputPassword" + id).setAttribute("hidden", true)
+                document.getElementById("inputISBN" + id).setAttribute("hidden", true)
+                document.getElementById("row" + id).classList.replace("column", "row")
+              }
+
+              document.querySelector('textarea').addEventListener("input", function(){
+                this.style.height = '0px';
+                this.style.height = this.scrollHeight + 'px';
+              })
+
+              function openSheet(btn) {
+                document.getElementById("sheetId").value = btn.dataset.id;
+                document.getElementById("sheetTitle").textContent = btn.dataset.title;
+                document.getElementById("overlay").classList.add("open");
+                document.getElementById("sheet").classList.add("open");
+              }
+
+              function closeSheet() {
+                document.getElementById("overlay").classList.remove("open");
+                document.getElementById("sheet").classList.remove("open");
+              }
+            </script>
+  </body>
+</html>
+
+<%- include('partials/footer.ejs'); -%>

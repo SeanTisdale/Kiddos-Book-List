@@ -1,0 +1,232 @@
+.noto {
+  font-family: "Noto Serif", serif;
+}
+
+h1 {
+  margin-bottom: 4px;
+  color: #fbfaf5;
+  font-family: "Noto Serif", serif;
+  font-weight: 500;
+}
+
+h2 {
+  margin-bottom: 4px;
+  color: #fbfaf5;
+  font-family: "Noto Serif", serif;
+  font-weight: 500;
+}
+
+@media (min-width: 996px) {
+  h3 {
+    font-weight: 350;
+    color: #fbfaf5;
+    font-family: "Noto Serif", serif;
+    width: 50%;
+  }
+}
+
+@media (max-width: 995px) {
+  h3 {
+    font-weight: 350;
+    color: #fbfaf5;
+    font-family: "Noto Serif", serif;
+  }
+}
+
+.bigGreen {
+  margin-top: 16px;
+  height: 48px;
+  width: 128px;
+  color: #fbfaf5;
+  border-radius: 8px;
+  background-color: #56ae57;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-family: "Noto Serif", serif;
+  border-style: none;
+  margin-bottom: 48px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  margin: auto;
+  padding-bottom: 8px;
+  border: 4px groove #fbfaf5;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+}
+
+.container2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 50%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #0b1026;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 70px, #fff, transparent),
+    radial-gradient(2px 2px at 160px 120px, #fff, transparent),
+    radial-gradient(1px 1px at 230px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 60px 160px, #fff, transparent),
+    radial-gradient(2px 2px at 200px 180px, #fff, transparent);
+  background-size: 250px 200px;
+}
+
+.pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.recommend {
+  font-weight: 400;
+  color: #fbfaf5;
+  font-family: "Noto Serif", serif;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: auto;
+  gap: 8px;
+}
+
+.editButton {
+  width: 48px;
+  height: 32px;
+  background-color: #cadeef;
+  color: black;
+  border-radius: 8px;
+  border-style: none;
+  font-family: "Noto Serif", serif;
+}
+
+.deleteButton {
+  width: 54px;
+  height: 32px;
+  background-color: #ff9b9b;
+  color: black;
+  border-radius: 8px;
+  border-style: none;
+  font-family: "Noto Serif", serif;
+}
+
+.doneButton {
+  width: 54px;
+  height: 32px;
+  background-color: #d0f0c0;
+  color: black;
+  border-radius: 8px;
+  border-style: none;
+  font-family: "Noto Serif", serif;
+  align-items: center;
+}
+
+.cancelButton {
+  width: 54px;
+  height: 32px;
+  background-color: lightgray;
+  color: black;
+  border-radius: 8px;
+  border-style: none;
+  font-family: "Noto Serif", serif;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: wrap;
+}
+
+.middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  gap: 4px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.autoGrow {
+  field-sizing: content;
+  min-width: 180px;
+  max-width: 180px;
+}
+
+.autoGrow2 {
+  field-sizing: content;
+  min-width: 400px;
+  max-width: 400px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sheet {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 360px;
+  padding: 40px;
+  background: #fff;
+  border-radius: 12px;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.sheet.open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}

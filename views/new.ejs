@@ -1,0 +1,54 @@
+<%- include('partials/header.ejs'); -%>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Book</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <form class="column center" action="/insert" method="post">
+      <textarea
+        class="autoGrow2"
+        type="text"
+        name="title"
+        placeholder="Insert a book title"
+      ></textarea>
+      <textarea
+        class="autoGrow2"
+        type="text"
+        name="description"
+        placeholder="Write your summary on the book here. It can be anything from why you like the book, why it was important to you, or why the rest of us should read it"
+      ></textarea>
+      <textarea
+        class="autoGrow2"
+        type="text"
+        name="isbn"
+        placeholder="Put the ISBN-10 here. This is used for generating the picture, and you know what they say, people judge a book by its cover, so don't forget this!"
+      ></textarea>
+      <textarea
+        class="autoGrow2"
+        type="text"
+        name="yourName"
+        placeholder="Write your name here. Once you've created one book, please use the same name you used the first time! This is for sorting purposes."
+      ></textarea>
+      <textarea
+        class="autoGrow2"
+        type="text"
+        name="password"
+        placeholder="Password"
+      ></textarea>
+      <button class="bigGreen pointer" type="submit">Create the entry!</button>
+    </form>
+  </body>
+</html>
+
+<%- include('partials/footer.ejs'); -%>
