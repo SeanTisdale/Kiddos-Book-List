@@ -109,7 +109,7 @@ app.post("/add", (req, res) => {
 
 app.post("/insert", async (req, res) => {
   //console.log(req.body);
-  let lowerName = req.body.yourName.toLowerCase();
+  let lowerName = req.body.yourName;
   let newLink = `https://covers.openlibrary.org/b/ISBN/${req.body.isbn}-M.jpg`;
   let existingId;
   let newRecommenderId;
@@ -117,13 +117,13 @@ app.post("/insert", async (req, res) => {
   if (req.body.password.toLowerCase() == "holland") {
     try {
       let exists = await db.query(
-        "SELECT 1 FROM recommenders WHERE LOWER(name) = ($1) LIMIT 1",
+        "SELECT 1 FROM recommenders WHERE name = ($1) LIMIT 1",
         [lowerName],
       );
       if (exists.rows.length > 0) {
         try {
           existingId = await db.query(
-            "SELECT id FROM recommenders WHERE LOWER(name) = ($1)",
+            "SELECT id FROM recommenders WHERE name = ($1)",
             [lowerName],
           );
         } catch (err) {
