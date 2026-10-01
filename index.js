@@ -145,7 +145,7 @@ app.post("/insert", async (req, res) => {
       } else {
         try {
           inserted = await db.query(
-            "INSERT INTO recommenders (name) VALUES (($1))",
+            "INSERT INTO recommenders (name) VALUES (($1)) RETURNING id",
             [lowerName],
           );
         } catch (err) {
