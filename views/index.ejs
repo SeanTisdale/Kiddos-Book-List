@@ -49,7 +49,7 @@
             <textarea id="inputISBN<%=book.id%>" type="text" name="updatedItemISBN" value="Input new ISBN if desired" autocomplete="off"
             autofocus="true" hidden="true" class="autoGrow">Input new ISBN-10 if needed</textarea>
                 <textarea id="inputPassword<%=book.id%>" type="text" name="password" value="Input Password" autocomplete="off"
-            autofocus="true" hidden="true" class="autoGrow">Input Password</textarea>
+            autofocus="true" hidden="true" class="autoGrow" placeholder="Input Password"></textarea>
             </div>
                 <button class="doneButton pointer" id="done<%=book.id%>" type="submit" hidden>Save</button>
                 <button class="cancelButton pointer" id="cancel<%=book.id%>" type="button" onclick="reverseHandler('<%=book.id%>')" hidden>Cancel</button>
