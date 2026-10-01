@@ -114,7 +114,7 @@ app.post("/insert", async (req, res) => {
   let existingId;
   let newRecommenderId;
   let inserted;
-  if (req.body.password == "holland") {
+  if (req.body.password.toLowerCase() == "holland") {
     try {
       let exists = await db.query(
         "SELECT 1 FROM recommenders WHERE LOWER(name) = ($1) LIMIT 1",
@@ -181,7 +181,7 @@ app.post("/edit", async (req, res) => {
   } else {
     newLink = req.body.currentLink;
   }
-  if (req.body.password == "holland") {
+  if (req.body.password.toLowerCase() == "holland") {
     try {
       await db.query(
         "UPDATE booklist SET book_name = ($1), description = ($2), link = ($3) WHERE id=($4)",
@@ -201,7 +201,7 @@ app.post("/edit", async (req, res) => {
 });
 
 app.post("/delete", async (req, res) => {
-  if (req.body.password == "ilovehailey") {
+  if (req.body.password.toLowerCase() == "ilovehailey") {
     try {
       await db.query("DELETE FROM booklist WHERE id=($1)", [req.body.id]);
     } catch (err) {
