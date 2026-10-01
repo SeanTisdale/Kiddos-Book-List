@@ -109,7 +109,7 @@ app.post("/add", (req, res) => {
 
 app.post("/insert", async (req, res) => {
   //console.log(req.body);
-  let lowerName = req.body.yourName;
+  let lowerName = req.body.yourName.toLowerCase();
   let newLink = `https://covers.openlibrary.org/b/ISBN/${req.body.isbn}-M.jpg`;
   let existingId;
   let newRecommenderId;
